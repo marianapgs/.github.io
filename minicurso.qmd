@@ -1,0 +1,296 @@
+---
+title: "Introdução à análise de dados com R"
+author: "Mariana de Paula Gomes"
+format: 
+  html:
+    css: styles.css
+editor: visual
+---
+
+
+## Bem-vindos! 
+
+✅ Certifiquem-se de que o R foi instalado e está em bom funcionamento.
+
+## Objetivos
+
+📌 Foco em pesquisas pesquisas acadêmicas
+
+📌 Vizualização, processamento e análise dos dados
+
+📌 Conclusão sobre a informação dos dados
+
+
+
+
+## Estatística descritiva
+
+- Quantitativas (numéricas)
+- Qualitativas (categóricas)
+
+### Tipos de variáveis
+
+```{r}
+#Carregando o diretório
+setwd("C:/Users/marip/Documents/Cursos")
+
+#Importando o conjunto de dados numéricos .txt
+dados_iris<- read.table(file = "iris_dataset.txt",header = TRUE,sep="\t")
+attach(dados_iris)
+
+#Visualização dos dados
+#View(dados_iris)
+
+#Resumo das informações do conjunto de dados
+summary(dados_iris)
+#Fatores
+summary(factor(dados_iris$especie))
+    
+```
+
+
+```{r}
+#Carregando conjunto de dados categóricos .csv
+dados_titanic<- read.csv(file = "titanic.csv")
+
+#Visualização dos dados
+View(dados_titanic)
+
+#Resumo das informações do conjunto de dados
+summary(dados_titanic)
+```
+
+
+### Medidas de tendência central
+
+- Média
+```{r}
+media<-mean(dados_iris$comprimento.da.sepala..cm.)
+media
+```
+- Mediana
+```{r}
+mediana<-median(dados_iris$comprimento.da.sepala..cm.)
+mediana
+```
+
+### Medidas de dispersão 
+
+- Variância e desvio padrão
+```{r}
+variancia<-var(dados_iris$comprimento.da.petala..cm.)
+desv_pad<-sd(dados_iris$comprimento.da.sepala..cm.)
+variancia
+desv_pad
+
+```
+Figura 1: Posicionamento da média e mediana em dados siméticos
+![Posicionamento da média e mediana em dados siméticos](img_media_mediana 2024-10-02 114955.png)
+
+- Coeficiente de variação
+```{r}
+cv<-desv_pad/media*100
+cv
+```
+
+```{r}
+# Criando a tabela de frequências para a variável "Class"
+tabela_frequencia_classe <- xtabs(Freq ~ Class, data = dados_titanic)
+tabela_frequencia_classe
+
+```
+
+### Gráficos
+
+- Plot
+```{r}
+plot(iris$Sepal.Length, iris$Sepal.Width, 
+     main = "Relação entre Comprimento e Largura da Sépala", 
+     xlab = "Comprimento da Sépala (cm)", 
+     ylab = "Largura da Sépala (cm)")
+
+```
+
+```{r}
+plot(iris$Sepal.Length, iris$Sepal.Width, 
+     col = as.factor(iris$Species), 
+     pch = 19, 
+     main = "Relação entre Comprimento e Largura da Sépala por Espécie", 
+     xlab = "Comprimento da Sépala (cm)", 
+     ylab = "Largura da Sépala (cm)")
+legend("topright", legend = levels(iris$Species), col = 1:3, pch = 19)
+
+
+```
+
+- Histograma 
+```{r}
+hist(dados_iris$comprimento.da.sepala..cm.,col="lightblue",probability=TRUE)
+lines(density(dados_iris$comprimento.da.sepala..cm.))
+```
+- Gráficos de barras
+```{r}
+# Contando o número de flores por espécie
+especie <- table(iris$Species)
+
+# Criando o barplot
+barplot(especie, 
+        main = "Número de Flores por Espécie", 
+        xlab = "Espécie", 
+        ylab = "Contagem", 
+        col = c("lightblue", "lightgreen", "lightpink"))
+
+```
+```{r}
+# Criando um gráfico de barras
+barplot(tabela_frequencia_classe, 
+        main = "Distribuição de Passageiros por Classe",
+        xlab = "Classe",
+        ylab = "Frequência",
+        col = c("lightblue", "lightgreen", "lightcoral"),
+        border = "black")
+```
+
+
+- Gráfico de pizza (pie chart)
+```{r}
+# Criando o gráfico de pizza
+pie(especie, 
+    main = "Distribuição de Espécies no Conjunto iris", 
+    col = c("lightblue", "lightgreen", "lightpink"),
+    labels = paste(names(especie), ":", especie))
+
+```
+```{r}
+# Criando o gráfico de pizza para a variável Sobrevivência
+# Tabela de frequência por sobrevivência
+tabela_frequencia_sobrevivencia <- xtabs(Freq ~ Survived, data = dados_titanic)
+
+pie(tabela_frequencia_sobrevivencia, 
+    main = "Proporção de Sobreviventes",
+    col = c("lightgreen", "lightcoral"))
+```
+```{r}
+pie(tabela_frequencia_classe, 
+    main = "Proporção de Passageiros por Classe", 
+    col = c("lightblue", "lightgreen", "lightcoral"))
+```
+
+- Boxplot
+```{r}
+# Criando um boxplot do comprimento da sépala por espécie
+boxplot(Sepal.Length ~ Species, 
+        data = iris, 
+        main = "Boxplot do Comprimento da Sépala por Espécie",
+        xlab = "Espécie", 
+        ylab = "Comprimento da Sépala (cm)", 
+        col = c("lightblue", "lightgreen", "lightpink"))
+
+```
+```{r}
+# Tabela de contingência cruzando Classe e Idade
+tabela_xtabs <- xtabs(Freq ~ Class + Age, data = dados_titanic)
+
+# Criando um boxplot da Idade em função da Sobrevivência
+boxplot(Freq ~ Class, data = dados_titanic,
+        main = "Distribuição da Idade por Sobrevivência",
+        xlab = "Sobreviveu",
+        ylab = "Idade",
+        col = c("lightgreen", "lightcoral"))
+```
+
+## Conclusões sobre os dados
+
+- Teste de hipótese
+
+Para chegar a conclusões sobre os dados que nos auxiliem na tomada de decisões devemos testar nossa hipótese para verificar sua veracidade. 
+
+📌 Todas as espécies tem a mesma média de comprimento de sépala?
+
+  $H_{0}$: todas as espécies tem a mesmo comprimento médio de sépala. 
+$$H_{0}: \mu_{versicolor} = \mu_{setosa} = \mu_{virginica}$$
+  $H_{1}$: ao menos uma das espécies não tem o mesmo comprimento médio de sépala. 
+  
+```{r}
+# Realizando a ANOVA
+anova_result <- aov(comprimento.da.sepala..cm. ~ especie, data = dados_iris)
+
+# Exibindo o resumo da ANOVA
+summary(anova_result)
+```
+
+Conclusão: Como p-valor<0,05, conclui-se que há diferença significativa entre o comprimento médio das sépalas das espécies ao nível de confiança de 5%. Portanto, as espécies não possuem mesmo comprimento médio de sépala.
+
+📌 Qual espécie tem maior comprimento de sépala? 
+
+```{r}
+# Realizando o teste de Tukey
+TukeyHSD(anova_result)
+```
+🟡 Versicolor vs. Setosa: 
+
+Há uma diferença significativa no comprimento da sépala entre as espécies Versicolor e Setosa, com a média de Versicolor sendo 0.930 cm maior que a de Setosa. O intervalo de confiança não inclui 0, o que indica que a diferença é estatisticamente significativa.
+
+
+🟠 Virginica vs. Setosa:     
+
+A diferença no comprimento da sépala entre as espécies Virginica e Setosa é significativa, com a média de Virginica sendo 1.582 cm maior que a de Setosa. O intervalo de confiança não inclui 0, reforçando que a diferença é estatisticamente significativa.
+
+
+🟢 Virginica vs. Versicolor:
+
+A espécie Virginica também tem um comprimento médio de sépala significativamente maior que Versicolor, com uma diferença de 0.652 cm. O intervalo de confiança também não inclui 0, indicando significância estatística.
+
+
+## Regressão Linear 
+
+\textbf{Quando usar?}
+
+Quando se deseja descrever a relação de variáveis explicativas com uma variável dependente. Apenas para variáveis quantitativas.
+
+📌 Regressão linear simples 
+$$y = \beta_{0} + \beta_{1}x $$
+📌 Regressão linear múltipla 
+$$y = \beta_{0} + \beta_{1}x + \beta_{2}x_{2} + ... + \beta_{k}x_{k}$$
+
+### Modelo estatístico
+Na equação abaixo temos a i-ésima observação da variável y sendo descrita pela função linear em que $\beta_{0}$ é o coeficiente linear e $\beta_{1}$ é o coeficiente angular que acompanha o i-ésimo valor da variável explicativa $x_{1}$. O termo $e_{i}$ corresponde ao erro aleatório, que não é explicado pelo modelo, associado a cada observação i. 
+$$y_{i} = \beta_{0} + \beta_{1}x_{1i} + e_{i}$$
+
+```{r}
+#Importando o conjunto de dados numéricos .txt
+dados_plants<- read.table(file = "PlantGrowth.txt",header = TRUE,sep="\t")
+attach(dados_plants)
+head(dados_plants)
+summary(dados_plants)
+
+```
+
+```{r}
+# Boxplot para visualizar a distribuição dos pesos por grupo de tratamento
+boxplot(peso ~ tratamento, data = dados_plants,
+        main = "Distribuição dos Pesos das Plantas por Tratamento",
+        xlab = "Tratamento", ylab = "Peso (g)",
+        col = c("lightblue", "lightgreen", "lightpink"))
+```
+
+
+
+
+```{r}
+# Ajustar o modelo de regressão linear simples
+modelo <- lm(peso ~ tratamento, data = dados_plants)
+
+# Ver os resultados do modelo
+summary(modelo)
+```
+
+### Conclusões da regressão
+
+🟡 (Intercept): O valor estimado para o intercepto é 5.0320. Isso significa que o peso médio das plantas no grupo de controle (grupo de referência) é de aproximadamente 5.03 unidades.
+
+🟢 tratamento trt1: O coeficiente associado ao tratamento trt1 é -0.3710. Isso significa que as plantas no tratamento trt1 tendem a pesar cerca de 0.371 unidades a menos que o grupo de controle, embora essa diferença não seja estatisticamente significativa (p = 0.1944, maior que 0.05).
+
+🟠 tratamento trt2: O coeficiente associado ao tratamento trt2 é 0.4940. Isso indica que as plantas no tratamento trt2 pesam em média 0.494 unidades a mais que as do grupo de controle. No entanto, a significância é marginal, com um valor-p de 0.0877 (um pouco acima do limite tradicional de 0.05, mas com indicação de uma possível tendência).
+
+
