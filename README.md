@@ -6,7 +6,7 @@
 *24 e 25 de outubro de 2024 das 14h às 16h.* 
 
 ## Conteúdo
-📌 Conteúdo programático;
+📌 [Conteúdo programático](https://marianapgs.github.io/sintegrado/programacao.md);
 
 📌 Tutorial de instalação do R e RStudio;
 
