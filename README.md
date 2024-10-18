@@ -8,6 +8,6 @@
 ## Conteúdo
 📌 [Conteúdo programático](https://marianapgs.github.io/sintegrado/conteudoprog.html);
 
-📌 Tutorial de instalação do R e RStudio;
+📌 [Tutorial de instalação do R e RStudio](https://marianapgs.github.io/sintegrado/tutorial-R.md);
 
-📌 Arquivo apresentado no minicurso.
+📌 [Arquivo apresentado no minicurso](https://marianapgs.github.io/sintegrado/minicurso.html).
