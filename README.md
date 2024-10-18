@@ -10,4 +10,4 @@
 
 📌 Tutorial de instalação do R e RStudio;
 
-📌 Arquivo apresentado no minicurso.
+📌 [Arquivo apresentado no minicurso](https://marianapgs.github.io/sintegrado/minicurso.html).
