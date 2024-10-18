@@ -3,7 +3,7 @@
 # Minicurso: Introdução à Análise de Dados com R 
 *Mariana de Paula Gomes*
 
-*24 e 25 de outubro de 2024 das 14h às 16h.* 
+*24 e 25 de outubro de 2024 das 14h30 às 16h30.* 
 
 ## Conteúdo
 📌 [Conteúdo programático](https://marianapgs.github.io/sintegrado/conteudoprog.html);
