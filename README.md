@@ -10,4 +10,6 @@
 
 📌 [Tutorial de instalação do R e RStudio](https://marianapgs.github.io/sintegrado/tutorial-R.html);
 
-📌 [Arquivo apresentado no minicurso](https://marianapgs.github.io/sintegrado/minicurso.html).
+📌[Link do Meet](https://meet.google.com/rwx-zyrj-oni);
+
+📌 Arquivo apresentado no minicurso (em breve).
