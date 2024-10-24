@@ -12,4 +12,4 @@
 
 📌[Link do Meet](https://meet.google.com/rwx-zyrj-oni);
 
-📌 [Arquivo apresentado no minicurso.](C:\Users\marip\Documents\Cursos\sintegrado)
+📌 [Arquivo apresentado no minicurso.](https://marianapgs.github.io/sintegrado/minicurso.html)
